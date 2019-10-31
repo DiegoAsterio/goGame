@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2">
+      <h3>History</h3>
+      <nav class="nav flex-column">
+	<a class="nav-link" {% if P1 %} href="{{ P1 }}" {% endif %}>P1</a>
+	<a class="nav-link" {% if P2 %} href="{{ P2 }}" {% endif %}>P2</a>
+	<a class="nav-link" {% if P3 %} href="{{ P3 }}" {% endif %}>P3</a>
+      </nav>
+    </div>
+    <div class="col">
+      <h2>Go ratings</h2>
+      <p> Ratings of Go players. Ratings in this webpage are updated daily. </p>
+      <a href="/" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Ratings</a>
+    </div>
+    <div class="col">
+      <h2>Statistics</h2>
+      <p> Different statistics applied to the go players </p>
+      <a href="/" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Statistics</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
