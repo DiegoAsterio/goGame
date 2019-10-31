@@ -3,4 +3,4 @@
 flask
 jinja2
 pickleshare
-mongodb
+pymongo
