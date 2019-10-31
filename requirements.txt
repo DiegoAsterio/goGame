@@ -1,0 +1,6 @@
+#requirements
+
+flask
+jinja2
+pickleshare
+mongodb
