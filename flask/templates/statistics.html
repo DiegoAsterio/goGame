@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+     <p class="text-left">This are spanish go Players</p> 
+      <ul class="list-group">
+	{% for name in params['names'] %}
+	<li class="list-group-item"> {{ name}} </li>
+	{% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
