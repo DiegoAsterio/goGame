@@ -8,7 +8,7 @@ db = PickleShareDB('miDB')
 from pymongo import MongoClient
 
 client = MongoClient("mongo", 27017)
-db = client.goPlayers
+mongodb= client.goPlayers
 
 app = Flask(__name__)
 app.secret_key = b'2V2XNWcP0L4rD2vKykr69rlBmnYkAAzdpn2gBwFHNKE='
@@ -34,6 +34,10 @@ def print_ratings():
 @app.route('/about')
 def print_about():
     return render_template('about.html')
+
+@app.route('/contact')
+def print_contact():
+    return render_template('contact.html')
 
 def valid_user(name):
     if not name in db:
@@ -78,9 +82,23 @@ def erase_session():
     session.clear()
     return redirect('/')
 
+@app.route('/statistics')
+def show_statistics():
+    params = dict()
+    numberOfSpaniards = mongodb.ugonet.count_documents({"citizenship":"ESP"})
+    vals = mongodb.ugonet.find({"citizenship":"ESP"})
+    pprint.pprint(vals)
+    names = []
+    for i in range(numberOfSpaniards):
+        names.append(vals[i]['key_name'])
+    params['names'] = names
+    return render_template('statistics.html',params=params)
+    
+
 @app.route('/mongo')
 def mongo():
-    val = db.ugonet.find({"citizenship":"ESP"})
-    numberOfSpaniards = db.ugonet.count_documents({"citizenship":"ESP"})
-    return val[1]['key_name']
+    val = db.ugonet.find_one()
+    pprint.pprint(val)
+    numberOfSpaniards = mongodb.ugonet.count_documents({"citizenship":"ESP"})
+    return val['key_name']
     
