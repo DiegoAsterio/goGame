@@ -5,6 +5,11 @@ from flask import Flask, render_template, session, request, redirect
 from pickleshare import *
 db = PickleShareDB('miDB')
 
+from pymongo import MongoClient
+
+client = MongoClient("mongo", 27017)
+db = client.goPlayers
+
 app = Flask(__name__)
 app.secret_key = b'2V2XNWcP0L4rD2vKykr69rlBmnYkAAzdpn2gBwFHNKE='
 
@@ -72,3 +77,10 @@ def print_login():
 def erase_session():
     session.clear()
     return redirect('/')
+
+@app.route('/mongo')
+def mongo():
+    val = db.ugonet.find({"citizenship":"ESP"})
+    numberOfSpaniards = db.ugonet.count_documents({"citizenship":"ESP"})
+    return val[1]['key_name']
+    
