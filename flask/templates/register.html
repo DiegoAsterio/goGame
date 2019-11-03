@@ -19,7 +19,7 @@
 	  <label class="form-check-label" for="exampleCheck1">I accept the terms of use and privacy policy</label>
 	</div>
 	<button type="submit" class="btn btn-primary"  aria-describedby="registerError">register</button>
-	  {% if regerror %} <small id="registerError" class="form-text text-muted"> {{ regerror }}</small> {% endif %}
+	  {% if params['error'] %} <small id="registerError" class="form-text text-muted"> {{ params['error'] }}</small> {% endif %}
       </form>
       
     </div>
