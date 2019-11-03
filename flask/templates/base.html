@@ -26,9 +26,9 @@
             <a href="/contact" class="nav-item nav-link">Contact</a>
           </div>
           <div class="navbar-nav ml-auto">
-	    {% if email %}
+	    {% if params['email'] %}
 	    <span class="navbar-text">
-	      Welcome {{ email }} |
+	      Welcome {{ params['email'] }} |
 	    </span>
 	    <a href="/documents" class="nav-item nav-link">insert players into database</a>
 	    <span class="navbar-text">
