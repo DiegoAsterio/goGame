@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+     <p class="text-left">Players added by {{ params['email'] }} </p> 
+      <ul class="list-group">
+	{% for name in params['names'] %}
+	<li class="list-group-item"> {{ name}} </li>
+	{% endfor %}
+      </ul>
+    </div>
+    <div class="col">
+     <p class="text-left">Do you want to erase any of this players ?</p> 
+
+     <div class="list-group" id="myList" role="tablist">
+	{% for name in params['names'] %}
+	<a class="list-group-item list-group-item-action" data-toggle="list" href="#{{name}}" role="tab"> {{ name}} </a>
+	{% endfor %}
+     </div>
+     <div class="tab-content">
+       {% for name in params['names'] %}
+	 <div class="tab-pane" id="{{name}}" role="tabpanel">
+	   <form action="/erase" method="POST">
+	     <div class="form-group">
+	       <input class="form-control" name="realname" value="{{name}}"readonly>
+	       <label for="erasename">Confirm by retyping the name</label>
+	       <input class="form-control" name="erasename">
+	     </div>
+	     <button type="submit" class="btn btn-primary"  >erase player</button>
+	   </form>
+	 </div>
+	{% endfor %}
+     </div>
+
+    </div>
+
+    <div class="col">
+      <p class="text-left">Do you want to add a new player?</p>
+      <form action="/documents" method="POST">
+	<div class="form-group">
+	  <label for="name">Name</label>
+	  <input class="form-control" id="name"name="name" >
+	</div>
+	<div class="form-group">
+	  <label for="sex">Sex</label>
+	  <select class="form-control" id="sex"name="sex">
+	    <option>Male</option>
+	    <option>Female</option>
+	    <option>Non binary gender</option>
+	  </select>
+	</div>
+	<div class="form-group">
+	  <label for="citizenship">Citizenship</label>
+	  <select class="form-control" id="citizenship" name="citizenship">
+	    {% for country in params['countries'] %}
+	    <option> {{ country }} </option>
+	    {% endfor %}
+	  </select>
+	</div>
+	<button type="submit" class="btn btn-primary"  aria-describedby="addplayerError">add player</button>
+	  {% if params['error'] %} <small id="addplayerErroro" class="form-text text-muted"> {{ params['error'] }}</small> {% endif %}
+
+
+      </form>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
