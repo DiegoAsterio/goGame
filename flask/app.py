@@ -152,9 +152,12 @@ def show_docs():
 
 @app.route('/erase', methods=['POST'])
 def erase_player():
+    params = addusername()
     pprint.pprint(request.form)
-    name = request.form['erasename']
-    mongodb.ugonet.remove({'key_name':name})
+    realname = request.form['realname']
+    namegiven = request.form['erasename']
+    if realname == namegiven:
+        mongodb.ugonet.remove({'key_name':realname, 'creator':params['email']})
     return redirect('/documents')
     
     
